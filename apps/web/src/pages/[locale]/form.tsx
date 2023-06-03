@@ -21,6 +21,7 @@ import { getJobs } from 'modules/form/api/job';
 import styles from '../../page.module.scss';
 import Router from 'modules/form/components/Router';
 import { UserInfo, ResumeInfo, Confirmation } from 'modules/form/components';
+import { withGetServerSideProps } from 'modules/auth/withGetServerSideProps';
 
 // After receiving jobs data for all languages, modify it so that you can select related option values
 // (ex. Enter web development after selecting English language -> web develop is displayed)
@@ -104,7 +105,7 @@ export default function FormPage({ jobs }) {
   );
 }
 
-export async function getStaticProps(ctx: GetStaticPropsContext) {
+export const getServerSideProps = withGetServerSideProps(async ctx => {
   const jobs = await getJobs();
   return {
     props: {
@@ -113,6 +114,4 @@ export async function getStaticProps(ctx: GetStaticPropsContext) {
     },
     revalidate: 86400, // 1 day
   };
-}
-
-export { getStaticPaths };
+});
