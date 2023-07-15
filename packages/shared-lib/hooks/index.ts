@@ -1,4 +1,5 @@
 import { useDebounce } from './useDebounce';
 import { usePrevious } from './usePrevious';
+import { usePagination } from './usePagination';
 
-export { useDebounce, usePrevious };
+export { useDebounce, usePrevious, usePagination };
